@@ -1,7 +1,6 @@
 import { createApp } from "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.45/vue.esm-browser.min.js";
 
-const site = 'https://vue3-course-api.hexschool.io/v2';
-const apiPath = 'luckymia';
+
 
 let productModal = {};
 let delProductModal = {};
@@ -9,6 +8,8 @@ let delProductModal = {};
 const app ={
     data(){
         return{
+            site : 'https://vue3-course-api.hexschool.io/v2',
+            apiPath : 'luckymia',
             products:[],
             tempProduct:{
               imagesUrl: [],
@@ -18,9 +19,9 @@ const app ={
     },
     methods: {
         checkLogin(){
-            const checkUrl = `${site}/api/user/check`;
+            const checkUrl = `${this.site}/api/user/check`;
             axios.post(checkUrl) //驗證
-              .then((res)=>{
+              .then(()=>{
                 this.getProducts();
               }) 
               .catch((err)=>{
@@ -29,18 +30,18 @@ const app ={
               })
         },
         getProducts(){
-            const getProductsUrl = `${site}/api/${apiPath}/admin/products/all`;
+            const getProductsUrl = `${this.site}/api/${this.apiPath}/admin/products/all`;
             axios.get(getProductsUrl)  //取得產品
               .then((res)=>{
                 this.products = res.data.products;
               })
         },
         updateProduct(){
-          let url = `${site}/api/${apiPath}/admin/product`;
+          let url = `${this.site}/api/${this.apiPath}/admin/product`;
           //用this.isNew判斷api要如何運行
           let method = 'post';
           if (!this.isNew){
-            url = `${site}/api/${apiPath}/admin/product/${this.tempProduct.id}`;
+            url = `${this.site}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`;
             method = 'put';
           }
           axios[method](url, {data:this.tempProduct}) //新增產品或編輯產品
@@ -50,7 +51,7 @@ const app ={
             })
         },
         deleteProduct(){
-          const url = `${site}/api/${apiPath}/admin/product/${this.tempProduct.id}`;
+          const url = `${this.site}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`;
           axios.delete(url) //新增產品或編輯產品
             .then((res)=>{
               this.getProducts();
