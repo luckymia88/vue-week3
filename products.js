@@ -1,5 +1,5 @@
 import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
-
+import pagination from "./pagination.js";
 
 
 let productModal = {};
@@ -15,6 +15,7 @@ const app ={
               imagesUrl: [],
             },
             isNew: false,
+            page:{},
         }
     },
     methods: {
@@ -29,11 +30,12 @@ const app ={
                 window.location = 'login.html';
               })
         },
-        getProducts(){
-            const getProductsUrl = `${this.site}/api/${this.apiPath}/admin/products/all`;
+        getProducts(page = 1){ //參數預設值
+            const getProductsUrl = `${this.site}/api/${this.apiPath}/admin/products/?page=${page}`;
             axios.get(getProductsUrl)  //取得產品
               .then((res)=>{
                 this.products = res.data.products;
+                this.page = res.data.pagination;
               })
         },
         updateProduct(){
@@ -77,6 +79,9 @@ const app ={
           }
         },
     },
+    components:{
+      pagination,
+    },
     mounted() {
         const myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)test2\s*\=\s*([^;]*).*$)|^.*$/, "$1");
         axios.defaults.headers.common.Authorization = myCookie;
@@ -86,5 +91,10 @@ const app ={
         delProductModal = new bootstrap.Modal('#delProductModal');
     },
 }
+
+app.component('product-modal',{
+  props:['tempProduct','updateProduct'],
+  template:'#product-modal-template',
+})
 
 createApp(app).mount('#app');
