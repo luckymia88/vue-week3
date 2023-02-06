@@ -31,7 +31,7 @@ const app ={
         },
         getProducts(){
             const getProductsUrl = `${this.site}/api/${this.apiPath}/admin/products/all`;
-            axios.get(getProductsUrl)  //取得產品
+            axios.get(getProductsUrl)  //取得全部產品
               .then((res)=>{
                 this.products = res.data.products;
               })
