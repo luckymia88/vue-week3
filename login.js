@@ -1,4 +1,4 @@
-import { createApp } from "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.45/vue.esm-browser.min.js";
+import { createApp } from "https://unpkg.com/vue@3/dist/vue.global.js";
 
 const app = {
     data(){
