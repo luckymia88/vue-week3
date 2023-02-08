@@ -19,7 +19,7 @@ const app = {
                 window.location = 'products.html';
               })
               .catch((err)=>{
-                alert(err.res.data.message);
+                alert(err.data.message);
               })
         },
     }

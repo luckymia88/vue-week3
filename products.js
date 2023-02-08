@@ -57,7 +57,7 @@ const app ={
               delProductModal.hide(); //關閉modal
             })
         },
-        openModel(status, product){
+        openModal(status, product){
           if (status === 'create'){  //判斷是編輯還是新增
             productModal.show(); //點擊後打開model
             this.isNew = true;
@@ -77,7 +77,7 @@ const app ={
         },
     },
     mounted() {
-        const myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)test2\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        const myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
         axios.defaults.headers.common.Authorization = myCookie;
         this.checkLogin();
 
