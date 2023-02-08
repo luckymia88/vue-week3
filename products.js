@@ -34,6 +34,9 @@ const app ={
               .then((res)=>{
                 this.products = res.data.products;
               })
+              .catch((err)=>{
+                alert(err.data.message);
+              })
         },
         updateProduct(){
           let url = `${site}/api/${apiPath}/admin/product`;
@@ -48,6 +51,9 @@ const app ={
               this.getProducts();
               productModal.hide(); //關閉modal
             })
+            .catch((err)=>{
+              alert(err.data.message);
+            })
         },
         deleteProduct(){
           const url = `${site}/api/${apiPath}/admin/product/${this.tempProduct.id}`;
@@ -55,6 +61,9 @@ const app ={
             .then((res)=>{
               this.getProducts();
               delProductModal.hide(); //關閉modal
+            })
+            .catch((err)=>{
+              alert(err.data.message);
             })
         },
         openModal(status, product){
