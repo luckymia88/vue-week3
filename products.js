@@ -77,8 +77,8 @@ const app ={
         },
     },
     mounted() {
-        const myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-        axios.defaults.headers.common.Authorization = myCookie;
+        const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        axios.defaults.headers.common.Authorization = token;
         this.checkLogin();
 
         productModal = new bootstrap.Modal('#productModal');
